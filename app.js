@@ -7,7 +7,8 @@ import { fileURLToPath } from "url";
 const app = express();
 
 // Using ejs as app's view engine
-app.set('view engine', ejs);
+app.set('view engine', 'ejs');
+
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -20,11 +21,13 @@ app.use(express.json());
 
 let today = new Date();
 let currentDay = today.getDay();
+let day = '';
+const week = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
 
 app.get('/', function(req, res) {
-	if(currentDay === 6 || currentDay === 0) {
-		res.sendFile(path.join(__dirname, "/weekend.html"))
-	} else res.sendFile(path.join(__dirname, "/weekday.html"));
+	day = week[currentDay];
+
+	res.render('list', {day});
 })
 
 
