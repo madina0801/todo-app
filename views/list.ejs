@@ -7,10 +7,19 @@
 	<title>ToDo</title>
 </head>
 <body>
-	<% if(day === 'Saturday' || day === 'Sunday')  {%> 
-		<h1 style="color: green"><%= day %> ToDo List</h1>
-	<% } else { %> 
-		<h1 style="color: blue"><%= day %> ToDo List</h1>
-	<% } %> 
+	<h1> <%= day %> </h1>
+
+	<ul>
+		<% for(let i = 0; i < newItems.length; i ++) {%>
+			<li><%= newItems[i] %></li>
+		<% } %> 
+	</ul>
+<form action="/" method="POST">
+	<label for="item">Add ToDo</label>
+	<input type="text" id="item" name="item">
+	<button type="submit">Add</button>
+</form>
+
+
 </body>
 </html>

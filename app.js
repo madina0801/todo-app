@@ -20,15 +20,22 @@ app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 
 let today = new Date();
-let currentDay = today.getDay();
-let day = '';
-const week = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+let newItems = [];
 
 app.get('/', function(req, res) {
-	day = week[currentDay];
+	const options = {weekday: 'long', day: "numeric", month: "long"};
+	let day = today.toLocaleDateString("en-US", options);
 
-	res.render('list', {day});
+	res.render('list', {day, newItems});
 })
+
+
+app.post("/", function(req, res) {
+	let newItem = req.body.item;
+	newItems.push(newItem);
+	res.redirect("/");
+})
+
 
 
 
