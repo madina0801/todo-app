@@ -13,7 +13,7 @@ app.set('view engine', 'ejs');
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-// app.use(express.static(__dirname));
+app.use(express.static(path.join(__dirname, "/public")));
 
 // Parse data
 app.use(express.urlencoded({extended: true}));
