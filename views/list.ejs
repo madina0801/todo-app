@@ -12,7 +12,7 @@
 				</div>
 			<% } %> 
 
-			<form action="/" method="POST">
+			<form action="<%= route %>" method="POST">
 				<input type="text" id="item" name="item" placeholder="New ToDo" autocomplete="off">
 				<button type="submit" name="list" value=<%= listTitle %>>+</button>
 			</form>

@@ -27,7 +27,7 @@ app.get('/', function(req, res) {
 	const options = {weekday: 'long', day: "numeric", month: "long"};
 	let day = today.toLocaleDateString("en-US", options);
 
-	res.render('list', {listTitle: day, newItems});
+	res.render('list', {listTitle: day, newItems, route: req.url});
 });
 
 app.post("/", function(req, res) {
@@ -43,8 +43,14 @@ app.post("/", function(req, res) {
 });
 
 app.get("/work", function(req, res) {
-	res.render("list", {listTitle: "Work", newItems: workItems});
+	res.render("list", {listTitle: "Work", newItems: workItems, route: "/work"});
 });
+
+app.post("/work", function(req, res) {
+	let newItem = req.body.item;
+	workItems.push(newItem);
+	res.redirect("/work")
+})
 
 app.get("/about", function(req, res) {
 	res.render("about");
