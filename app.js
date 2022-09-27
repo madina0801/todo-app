@@ -21,22 +21,34 @@ app.use(express.json());
 
 let today = new Date();
 let newItems = [];
+let workItems = [];
 
 app.get('/', function(req, res) {
 	const options = {weekday: 'long', day: "numeric", month: "long"};
 	let day = today.toLocaleDateString("en-US", options);
 
-	res.render('list', {day, newItems});
-})
-
+	res.render('list', {listTitle: day, newItems});
+});
 
 app.post("/", function(req, res) {
 	let newItem = req.body.item;
-	newItems.push(newItem);
-	res.redirect("/");
+
+	if(req.body.list === "Work") {
+		workItems.push(newItem);
+		res.redirect("/work");
+	} else {
+		newItems.push(newItem);
+		res.redirect("/");
+	}
+});
+
+app.get("/work", function(req, res) {
+	res.render("list", {listTitle: "Work", newItems: workItems});
+});
+
+app.get("/about", function(req, res) {
+	res.render("about");
 })
-
-
 
 
 app.listen(3000, console.log("Listening on port 3000!"))
