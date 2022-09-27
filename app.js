@@ -9,9 +9,10 @@ const app = express();
 // Using ejs as app's view engine
 app.set('view engine', 'ejs');
 
-
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
+
+import { date } from "./date.js";
 
 app.use(express.static(path.join(__dirname, "/public")));
 
@@ -19,15 +20,11 @@ app.use(express.static(path.join(__dirname, "/public")));
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 
-let today = new Date();
 let newItems = [];
 let workItems = [];
 
 app.get('/', function(req, res) {
-	const options = {weekday: 'long', day: "numeric", month: "long"};
-	let day = today.toLocaleDateString("en-US", options);
-
-	res.render('list', {listTitle: day, newItems, route: req.url});
+	res.render('list', {listTitle: date(), newItems, route: req.url});
 });
 
 app.post("/", function(req, res) {
