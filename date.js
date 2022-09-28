@@ -1,5 +1,5 @@
 export const date = function getDate() {
-  let today = new Date();
+  const today = new Date();
 
   const options = { 
 			weekday: "long", 
@@ -7,6 +7,6 @@ export const date = function getDate() {
 			month: "long" 
 		};
 
-  let day = today.toLocaleDateString("en-US", options);
+  const day = today.toLocaleDateString("en-US", options);
 		return day;
 }

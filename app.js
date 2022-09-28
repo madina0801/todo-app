@@ -24,7 +24,8 @@ let newItems = [];
 let workItems = [];
 
 app.get('/', function(req, res) {
-	res.render('list', {listTitle: date(), newItems, route: req.url});
+	let day = date();
+	res.render('list', {listTitle: day, newItems, route: req.url});
 });
 
 app.post("/", function(req, res) {
